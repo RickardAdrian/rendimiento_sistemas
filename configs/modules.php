@@ -1,4 +1,4 @@
-	<?php
+<?php
 						if (file_exists("modules/".$p.".php")) {
 							include "modules/".$p.".php";
 						}else{

@@ -1,31 +1,5 @@
 <?php
-check_user("productos");
-
-if(isset($agregar) && isset($cant)){
-	$idp=clear($agregar);
-	$cant=clear($cant);
-	$id_user=clear($_SESSION['id_user']);
-	$query=$mysqli->query("SELECT * FROM inventario ORDER BY id_art ASC");
-	$result=mysqli_fetch_array($query);
-	$v=$mysqli->query("SELECT * FROM carrito WHERE id_user ='id_user' AND id_art='$idp'");
-	$cantidad_bd=clear($result['cantidad']);
-	if($cant>$cantidad_bd){
-		alert("No se ha podido agregar al carrito, la cantidad es mayor que la existente");
-		redir("?p=productos");
-	}
-	else{
-		$query=$mysqli->query("UPDATE inventario SET cantidad=cantidad-$cant WHERE id_art=$idp");
-
-		if(mysqli_num_rows($v)>0){
-			$query=$mysqli->query("UPDATE carrito SET cant=cant + $cant WHERE id_user='$id_user' AND id_producto = '$idp'");
-		}else{
-			$query=$mysqli->query("INSERT INTO carrito (id_user,id_art,cant) VALUES ($id_user,$idp,$cant)");
-		}
-
-		alert("Se ha agregado al carrito");
-		redir("?p=productos");
-	}
-}
+include "configs/products.php";
 
 $query=$mysqli->query("SELECT * FROM inventario ORDER BY id_art ASC");
 while($result=mysqli_fetch_array($query)){

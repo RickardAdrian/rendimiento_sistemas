@@ -1,29 +1,7 @@
 <?php
-	if(isset($terminar)){
-		$monto=clear($monto_total);
-		$id_user=clear($_SESSION['id_user']);
-		
-		$query=$mysqli->query("INSERT INTO compra (id_user,fecha,monto,estado) VALUES ('$id_user',NOW(),'$monto',0)");
-		
-		$sc=$mysqli->query("SELECT * FROM  compra WHERE id_user='$id_user' ORDER BY id DESC LIMIT 1");
+include "configs/cart.php";
 
-		$rc=mysqli_fetch_array($sc);
-
-		$ultima_compra=$rc['id'];
-
-		$query2=mysqli->query("SELECT * FROM carrito WHERE id_user = $id_user");
-		while($result2=mysqli_fetch_array($query2)){
-
-			$sp=$mysqli->query("SELECT * FROM productos WHERE id = '".$result2['id_producto']."'");
-			$rp=mysqli_fetch_array($sp);
-
-			$monto=$rp['price'];
-
-			$mysqli->query("INSERT INTO producto_compra (id_compra,id_producto,cantidad,monto) VALUES ('$ultima_compra','".$result2['id_producto']."','".$result2['cant']."','$monto')");
-		}
-		alert("Se ha finalizado la compra");
-		redir("./");
-	}
+if(isset($_SESSION['id_user'])){
 ?>
 
 <v-card>
@@ -34,6 +12,7 @@
 		<th style="border: 1px solid #ddd; text-align: left; padding: 15px;">Cantidad</th>
 		<th style="border: 1px solid #ddd; text-align: left; padding: 15px;">Precio por unidad</th>
 		<th style="border: 1px solid #ddd; text-align: left; padding: 15px;">Precio Total</th>
+		<th style="border: 1px solid #ddd; text-align: left; padding: 15px;">Modificar</th>
 	</tr>
 <?php
 	$id_user=clear($_SESSION['id_user']);
@@ -54,6 +33,7 @@
 			      <td style="border: 1px solid #ddd; text-align: left; padding: 15px;"><?=$cantidad?></td>
 			      <td style="border: 1px solid #ddd; text-align: left; padding: 15px;"><?=$precio_unidad?></td>
 			      <td style="border: 1px solid #ddd; text-align: left; padding: 15px;"><?=$precio_total?></td>
+			      <td style="border: 1px solid #ddd; text-align: left; "><a onclick="modificar('<?=$result['id_art']?>','<?=$result['cant']?>')" style="padding-left: 20%"><i class="fas fa-edit"></i></a><a href="?p=carrito&cantidad=<?=$cantidad?>&eliminar=<?=$result['id_art']?>" style="padding-left: 20%"><i class="fas fa-times"></i></a></td>
 			    </tr>
 		<?php
 	}
@@ -63,9 +43,53 @@
 <br>
 <h2 class="text-xs-right" style="margin-right: 10% ;">Monto Total: <b><?=$monto_total?></b></h2>
 <form method="post" action="">
-	<input type="hidden" name="monto_total" value="<?=$monto_total?>"/>
-	<v-btn class="teal white--text" type="submit" name="terminar">Terminar Compra</v-btn>
+	<?php
+	if($monto_total>0){
+	?>
+		<input type="hidden" name="monto_total" value="<?=$monto_total?>"/>
+		<v-btn class="teal white--text" type="submit" name="terminar">Terminar Compra</v-btn>
+	<?php
+	}
+	?>
 </form>
 </v-card>
+<?php
+}else{
+?>
+	<v-container>
+				 <v-layout align-center justify-center row fill-height>
+					<v-card>
+						<v-card-title class="teal white--text"><h2>ATENCIÓN</h2></v-card-title>
+						<div class="text-xs-center headline" style="margin:10% ">No haz iniciado sesión</div>
+							<div class="text-xs-center"> 
+								<a href="?p=login">
+									<v-btn class="teal white--text">Iniciar Sesión</v-btn>
+								</a>
+							</div>
+							<div class="text-xs-center">o tambien</div>
+							<div class="text-xs-center">
+								<a href="?p=register">
+									<v-btn class="teal white--text">Registrarte</v-btn>
+								</a>
+							</div>
+					</v-card>
+				</v-layout>
+	</v-container>
+<?php
+}
+?>
 
+<script type="text/javascript">
+		
+	function modificar(idc,value){
+		var new_cant = prompt("¿Cual es la nueva cantidad?");
 
+		if(new_cant>0){
+
+			window.location="?p=carrito&id_art="+idc+"&modificar="+new_cant+"&value="+value;
+
+		}
+
+	}
+
+</script>

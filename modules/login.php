@@ -51,18 +51,22 @@ if(isset($_SESSION['id_user'])){ // si hay una sesion iniciada
 					 	<v-flex xs12 md12>
 					 		Usuario
 							<div class="form-group">
-								<input type="text" autocomplete="off" class="form-control" style="border:1px solid black" placeholder="Usuario" name="username"/>
+								<input type="text" autocomplete="off" class="form-control" required style="width: 30%;  border:1px solid black" placeholder="Usuario" name="username"/>
 							</div>
 							<br>
 							Contraseña
 							<div class="form-group">
-								<input type="password" class="form-control" style="border:1px solid black" placeholder="Contraseña" name="password"/>
+								<input type="password" class="form-control" required style="width: 30%;  border:1px solid black" placeholder="Contraseña" name="password"/>
 							</div>
 							<br>
 							<div class="form-group">
-								<v-btn class="teal" name="enviar" type="submit"><i class="fa fa-sign-in"></i> Ingresar</v-btn>
+								<v-btn class="teal white--text" name="enviar" type="submit"><i class="fa fa-sign-in"></i> Ingresar</v-btn>
 								<v-btn class="" name="Limpiar" type="reset"><i class="fa fa-sign-in"></i> Limpiar</v-btn>
 							</div>
+							<br>
+							o tambien puedes registrarte
+							<br>
+							<v-btn class="teal white--text" href="?p=register">Registrarse</v-btn>
 						</v-flex>
 					 </v-container>
 				</v-card>

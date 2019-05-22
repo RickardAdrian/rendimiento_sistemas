@@ -7,7 +7,7 @@
 <html>
 <head>
 	<title>Pastelería</title>
-	
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
 	<link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/vuetify/dist/vuetify.min.css" rel="stylesheet">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
@@ -21,15 +21,18 @@
 
 				<v-spacer></v-spacer>
 				<v-toolbar-items>
-					  
 				      <v-btn flat href="?p=principal">Principal</v-btn>
 				      <v-btn flat href="?p=productos">Productos</v-btn>
 				      <v-btn flat href="?p=carrito">Carrito</v-btn>
-				      <v-btn flat href="?p=login">Sesión</v-btn>
 				      <?php
+				      if(empty($_SESSION['id_user'])){
+				      ?>
+				      	<v-btn flat href="?p=login">Sesión</v-btn>
+				      <?php
+				      }
 					     if(isset($_SESSION['id_user'])){
 					     	?>
-					     		 <v-btn class="white black--text" href="#"><?=name_user($_SESSION['id_user'])?></v-btn>
+					     		 <v-btn class="white black--text" href="?p=user"><?=name_user($_SESSION['id_user'])?></v-btn>
 					     		 <v-btn flat href="?p=salir">Salir</v-btn>
 				      		<?php
 				      	}

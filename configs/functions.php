@@ -43,6 +43,13 @@
 		return $result['username'];
 	}
 
+	function role_($id_user){
+		$mysqli=connect();
+		$query=$mysqli->query("SELECT * FROM users WHERE id_user='$id_user'");
+		$result=mysqli_fetch_array($query);
+		return $result['role'];
+	}
+
 	function redir($var){
 		?>
 		<script type="text/javascript">
