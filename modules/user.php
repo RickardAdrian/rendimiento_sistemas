@@ -1,10 +1,10 @@
 <?php
 if(isset($_SESSION['id_user'])){
 	if(role_($_SESSION['id_user'])=="admin"){
-		include "roles/admin.php";
+		include "admin.php";
 	} 
 	else {
-		include "roles/client.php";
+		include "client.php";
 	}
 }
 else{

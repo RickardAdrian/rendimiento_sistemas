@@ -59,6 +59,16 @@ if(isset($_SESSION['id_user'])){ // si hay una sesion iniciada
 								</select>
 							</div>
 							<br>
+							Metodo de pago
+							<div class="form-group">
+								<select name="pago" autocomplete="off" required style="width: 30%; border:1px solid black">
+									<option value="debito">Debito</option>
+									<option value="credito">Credito</option>
+									<option value="efectivo">Efectivo</option>
+									<option value="prepago">Prepago</option>									
+								</select>
+							</div>
+							<br>
 							<div class="form-group">
 								<v-btn class="teal white--text" name="enviar" type="submit"><i class="fa fa-sign-in"></i> Registrarse</v-btn>
 								<br>

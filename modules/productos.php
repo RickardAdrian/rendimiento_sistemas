@@ -19,7 +19,7 @@ while($result=mysqli_fetch_array($query)){
 								</b>
 								<!-- <img src=".././images/<?=$result['imagen']?>"/> -->
 								
-								<div> <b>$<?=$result['precio']?></b></h2><br> <b>Cantidad: </b><?=$result['cantidad']?></div>
+								<div> <b>$<?=$result['precio']?></b></h2><br> <b>Cantidad existente: </b><?=$result['cantidad']?></div>
 								<v-card-actions>
 									 <v-btn onclick="agregar_carro('<?=$result['id_art']?>');">Comprar</v-btn>
 								</v-card-actions>

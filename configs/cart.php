@@ -43,8 +43,9 @@
 	if(isset($terminar)){
 		$monto=clear($monto_total);
 		$id_user=clear($_SESSION['id_user']);
-		
-		$query=$mysqli->query("INSERT INTO compra (id_user,fecha,monto,estado) VALUES ('$id_user',NOW(),'$monto',0)");
+		$year=date("Y");
+		$month=date("m");
+		$query=$mysqli->query("INSERT INTO compra (id_user,year,month,monto,estado) VALUES ('$id_user','$year','$month','$monto',0)");
 		
 		$sc=$mysqli->query("SELECT * FROM  compra WHERE id_user='$id_user' ORDER BY id DESC LIMIT 1");
 
@@ -60,7 +61,8 @@
 
 			$monto=$rp['precio'];
 
-			$mysqli->query("INSERT INTO producto_compra (id_compra,id_producto,cantidad,monto) VALUES ('$ultima_compra','".$result2['id_art']."','".$result2['cant']."','$monto')");
+			$mysqli->query("INSERT INTO productos_compra (id_compra,id_producto,cantidad,monto) VALUES ('$ultima_compra','".$result2['id_art']."','".$result2['cant']."','$monto')");
+			$query3 = $mysqli -> query("DELETE FROM carrito WHERE id_user= $id_user");
 		}
 		alert("Se ha finalizado la compra");
 		redir("./");
