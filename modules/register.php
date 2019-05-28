@@ -69,6 +69,21 @@ if(isset($_SESSION['id_user'])){ // si hay una sesion iniciada
 								</select>
 							</div>
 							<br>
+							CardHolder
+							<div class="form-group">
+								<input type="" autocomplete="off" class="form-control" required style="width: 30%; border:1px solid black" placeholder="CardHolder" name="CardHolder"/>
+							</div>
+							<br>
+							CardNumber
+							<div class="form-group">
+								<input type="" autocomplete="off" class="form-control" required style="width: 30%; border:1px solid black" placeholder="CardNumber" name="CardNumber"/>
+							</div>
+							<br>
+							CVV
+							<div class="form-group">
+								<input type="" autocomplete="off" class="form-control" required style="width: 30%; border:1px solid black" placeholder="CVV" name="CVV"/>
+							</div>
+							<br>									
 							<div class="form-group">
 								<v-btn class="teal white--text" name="enviar" type="submit"><i class="fa fa-sign-in"></i> Registrarse</v-btn>
 								<br>

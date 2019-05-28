@@ -6,7 +6,7 @@
 <script src="js/pdfFromHTML.js"></script>
 <script src="js/excelFromHTML.js"></script>
 
-<div style="background-color: white;">
+<v-card class="pa-2">
 	<div id="HTMLtoPDF">
 	<h1>Catalogo de productos</h1>
 	<table id="tabla" style="border: 1px solid #ddd; text-align: left; border-collapse: collapse; width: 100%;" >
@@ -40,4 +40,4 @@
 <v-btn class="teal white--text" onclick="HTMLtoPDF('productos')">
 	Exportar a PDF
 </v-btn>
-</div>
+</v-card>

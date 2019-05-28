@@ -3,10 +3,15 @@
 if(isset($enviar)){
 	$username = clear($username);
 	$password = clear($password);
+	$t9 = microtime(true);
 	$q = $mysqli->query("SELECT * FROM users WHERE username = '$username' AND password = '$password'");
 	if(mysqli_num_rows($q)>0){
 		$r = mysqli_fetch_array($q);
 		$_SESSION['id_user'] = $r['id_user'];
+		$t10 = microtime(true);
+		$tiempofi5 = $t10 - $t9;
+		$tiempo = clear($tiempofi5);
+		$mysqli ->query("INSERT INTO transacciones (fecha,tiempo, tipo_transaccion) VALUES (NOW(),'$tiempofi5','Inicio de Sesion')");
 		if(isset($return)){
 			redir("?p=productos");
 		}
@@ -18,6 +23,7 @@ if(isset($enviar)){
 		alert("Los datos no son validos");
 		redir("?p=login");
 	}
+
 }
 if(isset($_SESSION['id_user'])){ // si hay una sesion iniciada
 	?>

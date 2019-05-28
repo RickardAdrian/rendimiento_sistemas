@@ -6,6 +6,7 @@
 		$cantidad = clear($cantidad);
 		echo "<script>console.log({$eliminar})</script>";
 		echo "<script>console.log({$cantidad})</script>";
+	
 		$mysqli -> query("UPDATE inventario SET cantidad = cantidad + '$cantidad' WHERE id_art = '$eliminar'");
 		$mysqli -> query("DELETE FROM carrito WHERE id_art = '$eliminar'");
 		redir("?p=carrito");
@@ -41,6 +42,7 @@
 	}
 	
 	if(isset($terminar)){
+		$t9 = microtime(true);
 		$monto=clear($monto_total);
 		$id_user=clear($_SESSION['id_user']);
 		$year=date("Y");
@@ -61,10 +63,14 @@
 
 			$monto=$rp['precio'];
 
-			$mysqli->query("INSERT INTO productos_compra (id_compra,id_producto,cantidad,monto) VALUES ('$ultima_compra','".$result2['id_art']."','".$result2['cant']."','$monto')");
+			$mysqli->query("INSERT INTO productos_compra (id_compra,id_producto,cantidad,monto,id_user) VALUES ('$ultima_compra','".$result2['id_art']."','".$result2['cant']."','$monto','$id_user')");
 			$query3 = $mysqli -> query("DELETE FROM carrito WHERE id_user= $id_user");
 		}
-		alert("Se ha finalizado la compra");
-		redir("./");
+		$t10 = microtime(true);
+		$tiempofi5 = $t10 - $t9;
+		$tiempo = clear($tiempofi5);
+		$mysqli ->query("INSERT INTO transacciones (fecha,tiempo, tipo_transaccion) VALUES (NOW(),'$tiempofi5','Compra')");
+		include "payment.php";
+		include "correo.php";
 	}
 ?>

@@ -9,10 +9,11 @@ while($result=mysqli_fetch_array($query)){
 	else{
 		?>
 
-		<div class="inventario" style="display: inline-block;">
+		<div class="inventario" style="display: inline-block; width: 33%">
 				<v-container>
-					 <v-layout>
-							<v-card>
+					 <v-layout justify-center>
+					 	<v-flex >
+							<v-card class="pa-2 ma-2" >
 								<v-card-title class="">
 										<span class="headline"><?=$result['articulo']?></span>
 									</v-card-title>
@@ -21,9 +22,10 @@ while($result=mysqli_fetch_array($query)){
 								
 								<div> <b>$<?=$result['precio']?></b></h2><br> <b>Cantidad existente: </b><?=$result['cantidad']?></div>
 								<v-card-actions>
-									 <v-btn onclick="agregar_carro('<?=$result['id_art']?>');">Comprar</v-btn>
+									 <v-btn class="orange" onclick="agregar_carro('<?=$result['id_art']?>');">Comprar</v-btn>
 								</v-card-actions>
 							</v-card>
+						</v-flex>
 					</v-layout>
 				</v-container>
 		</div>
@@ -33,9 +35,6 @@ while($result=mysqli_fetch_array($query)){
 ?>
 
 <script type="text/javascript">
-
-	
-
 	function agregar_carro(idp){
 		var cant= prompt("¿Que cantidad desea comprar?",1);
 		if(cant.length>0){

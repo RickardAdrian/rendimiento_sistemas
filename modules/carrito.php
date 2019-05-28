@@ -47,7 +47,7 @@ if(isset($_SESSION['id_user'])){
 	if($monto_total>0){
 	?>
 		<input type="hidden" name="monto_total" value="<?=$monto_total?>"/>
-		<v-btn class="teal white--text" type="submit" name="terminar">Terminar Compra</v-btn>
+		<v-btn class="teal white--text" type="submit"  name="terminar" >Terminar Compra</v-btn>
 	<?php
 	}
 	?>

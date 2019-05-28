@@ -6,7 +6,7 @@
 <script src="js/pdfFromHTML.js"></script>
 <script src="js/excelFromHTML.js"></script>
 
-<div style="background-color: white;">
+<v-card class="pa-2">
 <div id="HTMLtoPDF">
 	<h1>Catalogo de clientes</h1>
 	<table id="tabla" style="border: 1px solid #ddd; text-align: left; border-collapse: collapse; width: 100%;" >
@@ -19,7 +19,7 @@
 			<th style="border: 1px solid #ddd; text-align: left; padding: 15px;">Rol</th>
 		</tr>
 		<?php
-			$query=$mysqli->query("SELECT * FROM users ");
+			$query=$mysqli->query("SELECT * FROM users");
 			while($result=mysqli_fetch_array($query)){
 		?>
 			<tr>
@@ -42,7 +42,6 @@
 <v-btn class="teal white--text" onclick="HTMLtoPDF('clientes')">
 	Exportar a PDF
 </v-btn>
-</div>
-
+</v-card>
 
 
